@@ -62,29 +62,44 @@ const font = fontLoader.load(
     textGeometry.center()
 
     const material = new THREE.MeshMatcapMaterial()
-    // material.wireframe = true
+
     material.matcap = matcapTexture
+    material.color = new THREE.Color()
+    material.wireframe = false
+    gui.addColor(material, 'color')
+    gui.add(material, 'wireframe')
+
     const text = new THREE.Mesh(textGeometry, material)
     scene.add(text)
 
-
+    const textBoundingBox = textGeometry.boundingBox
 
     const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45)
 
     for (let i = 0; i < 300; i++) {
+      let position = {
+        x: (Math.random() - 0.5) * 10,
+        y: (Math.random() - 0.5) * 10,
+        z: (Math.random() - 0.5) * 10
+      }
+
+      if (
+        position.x > textBoundingBox.min.x && position.x < textBoundingBox.max.x &&
+        position.y > textBoundingBox.min.y && position.y < textBoundingBox.max.y &&
+        position.z > textBoundingBox.min.z && position.z < textBoundingBox.max.z
+      ) {
+        // Skip adding this donut if it's inside the bounding box
+        i--;
+        continue;
+      }
+
       const donut = new THREE.Mesh(donutGeometry, material)
-
-      donut.position.x = (Math.random() - 0.5) * 10
-      donut.position.y = (Math.random() - 0.5) * 10
-      donut.position.z = (Math.random() - 0.5) * 10
-
+      donut.position.set(position.x, position.y, position.z)
       donut.rotation.x = Math.random() * Math.PI
       donut.rotation.y = Math.random() * Math.PI
 
       const scale = Math.random()
-      donut.scale.x = scale
-      donut.scale.y = scale
-      donut.scale.z = scale
+      donut.scale.set(scale, scale, scale)
 
       // Assign random rotation speeds and directions
       donut.userData.rotationSpeedX = (Math.random() - 0.5) * 0.02
@@ -97,6 +112,8 @@ const font = fontLoader.load(
     }
   }
 )
+
+
 
 /**
  * Sizes
