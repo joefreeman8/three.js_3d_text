@@ -1,4 +1,9 @@
-# Three.js Journey
+# Three.js Journey - 3d Text
+
+# Deployed link on vercel
+[deployed project](https://threejs3dtext-et0rvr4kb-joefreeman8s-projects.vercel.app/)
+
+A fun small project practicing different materials & creating 3d text
 
 ## Setup
 Download [Node.js](https://nodejs.org/en/download/).
@@ -14,3 +19,5 @@ npm run dev
 # Build for production in the dist/ directory
 npm run build
 ```
+
+
