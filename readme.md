@@ -1,6 +1,6 @@
 # Three.js Journey - 3d Text
 
-# Deployed link on vercel
+### Deployed link on vercel
 [deployed project](https://threejs3dtext-et0rvr4kb-joefreeman8s-projects.vercel.app/)
 
 A fun small project practicing different materials & creating 3d text
